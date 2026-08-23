@@ -30,7 +30,7 @@ PRICE_HIKE_DATE = date(2024, 9, 1)  # simulated event: churn spikes right after
 
 def random_date(start, end):
     delta = (end - start).days
-    return start + timedelta(days=random.randint(0, delta))
+    return start + timedelta(days = random.randint(0, delta))
 
 def weighted_signup_date():
     # more signups in Jan (budget resets) and Sep (back-to-business), fewer in Jul/Dec
@@ -42,10 +42,10 @@ def weighted_signup_date():
 
 def pick_plan(segment):
     if segment == "Enterprise":
-        return random.choices(["Pro", "Enterprise"], weights=[0.2, 0.8])[0]
+        return random.choices(["Pro", "Enterprise"], weights = [0.2, 0.8])[0]
     if segment == "Mid-Market":
-        return random.choices(["Basic", "Pro", "Enterprise"], weights=[0.2, 0.6, 0.2])[0]
-    return random.choices(["Basic", "Pro"], weights=[0.7, 0.3])[0]
+        return random.choices(["Basic", "Pro", "Enterprise"], weights = [0.2, 0.6, 0.2])[0]
+    return random.choices(["Basic", "Pro"], weights = [0.7, 0.3])[0]
 
 customers = []
 events = []
@@ -54,7 +54,7 @@ event_id = 1
 for i in range(1, NUM_CUSTOMERS + 1):
     customer_id = f"CUST{i:05d}"
     signup_date = weighted_signup_date()
-    segment = random.choices(SEGMENTS, weights=[0.55, 0.30, 0.15])[0]
+    segment = random.choices(SEGMENTS, weights = [0.55, 0.30, 0.15])[0]
     plan = pick_plan(segment)
 
     customers.append({
@@ -81,13 +81,13 @@ for i in range(1, NUM_CUSTOMERS + 1):
     current_date = signup_date
     active = True
     while active:
-        current_date = current_date + timedelta(days=30)
+        current_date = current_date + timedelta(days = 30)
         if current_date > END_DATE:
             break
 
         churn_prob = PLANS[current_plan]["monthly_churn"]
         # price hike bump: churn roughly doubles for ~2 months after the hike
-        if PRICE_HIKE_DATE <= current_date <= PRICE_HIKE_DATE + timedelta(days=60):
+        if PRICE_HIKE_DATE <= current_date <= PRICE_HIKE_DATE + timedelta(days = 60):
             churn_prob *= 2.0
 
         roll = random.random()
@@ -136,8 +136,8 @@ for i in range(1, NUM_CUSTOMERS + 1):
 customers_df = pd.DataFrame(customers)
 events_df = pd.DataFrame(events).sort_values(["customer_id", "event_date"])
 
-customers_df.to_csv("customers.csv", index=False)
-events_df.to_csv("subscription_events.csv", index=False)
+customers_df.to_csv("customers.csv", index = False)
+events_df.to_csv("subscription_events.csv", index = False)
 
 print(f"Customers generated: {len(customers_df)}")
 print(f"Events generated: {len(events_df)}")
