@@ -2,8 +2,7 @@
 -- many months have elapsed between their signup and each month in MONTHLY_MRR.
 CREATE OR REPLACE TABLE SAAS_ANALYTICS.MARTS.COHORT_RETENTION AS
 WITH cohorts AS (
-    SELECT
-        customer_id,
+    SELECT customer_id,
         DATE_TRUNC('month', signup_date) AS cohort_month
     FROM SAAS_ANALYTICS.STAGING.CUSTOMERS
 ),
