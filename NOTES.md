@@ -28,3 +28,10 @@ dropped to $0 this month. Baseline churn runs 2-5% most months. Clear spike
 to 7.3-7.4% in Sep-Oct 2024 confirms the simulated price-hike is visible in 
 both MRR growth (slowdown) and churn rate (spike) - good validation that 
 the synthetic data behaves realistically.
+
+Aug 28: Built 05_cohorts.sql - cohort retention table grouping customers by 
+signup month and tracking % still active at each month-since-signup 
+(DATEDIFF + FIRST_VALUE window function to normalize against month-0 count). 
+Worked correctly on first run. Jan 2023 cohort: 100% at signup, declining to 
+69.6% by month 12, 35.7% by month 29 - realistic decay curve. This table is 
+ready to become the classic cohort retention heatmap in Tableau.
