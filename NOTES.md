@@ -21,3 +21,10 @@ with COUNT(CASE WHEN...THEN 1 END) instead, which is portable across SQL
 dialects. First real output: Total MRR grew from $8,074 (Jan 2023) to 
 $189,891 (Jun 2025) across 899 active customers - simulated price-hike 
 churn spike visible as a growth slowdown around Sep-Oct 2024.
+
+Aug 28: Built 04_churn.sql - monthly churn rate using LAG() to compare each 
+customer's MRR month-over-month, counting anyone active last month who 
+dropped to $0 this month. Baseline churn runs 2-5% most months. Clear spike 
+to 7.3-7.4% in Sep-Oct 2024 confirms the simulated price-hike is visible in 
+both MRR growth (slowdown) and churn rate (spike) - good validation that 
+the synthetic data behaves realistically.
