@@ -18,6 +18,3 @@ SELECT
 FROM customer_month_status
 GROUP BY month_start
 ORDER BY month_start;
-
--- Check it
-SELECT * FROM SAAS_ANALYTICS.MARTS.MONTHLY_CHURN ORDER BY month_start;
