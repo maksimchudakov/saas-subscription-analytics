@@ -12,3 +12,8 @@ executes the statement the cursor is in, not the whole file - need to run
 each CREATE TABLE statement separately. Verified row counts match: 1500 
 customers, 2419 events. Pushed 01_setup_database.sql and 02_staging.sql 
 to GitHub.
+
+Aug 27: Built 03_marts.sql - date spine + MONTHLY_MRR table that reconstructs 
+each customer's MRR per month from their most recent subscription event as 
+of that month-end (QUALIFY + ROW_NUMBER). This is the base table the 
+MRR/churn/cohort metrics will build on top of.
