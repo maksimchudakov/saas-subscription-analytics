@@ -13,3 +13,11 @@ executes the statement the cursor is in, not the whole file - need to run
 each CREATE TABLE statement separately. Verified row counts match: 1500 
 customers, 2419 events. Pushed 01_setup_database.sql and 02_staging.sql 
 to GitHub.
+
+Aug 27: Built 03_marts.sql - date spine + MONTHLY_MRR table reconstructing 
+each customer's monthly MRR from their most recent event (QUALIFY + 
+ROW_NUMBER). Hit a Snowflake syntax error using FILTER(WHERE...) - fixed 
+with COUNT(CASE WHEN...THEN 1 END) instead, which is portable across SQL 
+dialects. First real output: Total MRR grew from $8,074 (Jan 2023) to 
+$189,891 (Jun 2025) across 899 active customers - simulated price-hike 
+churn spike visible as a growth slowdown around Sep-Oct 2024.
